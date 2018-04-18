@@ -56,7 +56,7 @@ class SessionFactory extends AbstractFactory
     /**
      * @return \Symfony\Component\HttpFoundation\Session\Storage\Handler\NativeFileSessionHandler
      */
-    public function createSessionHandler(): \SessionHandler
+    public function createSessionHandler()
     {
         return new NativeFileSessionHandler();
     }
