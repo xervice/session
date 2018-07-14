@@ -10,9 +10,6 @@ use Symfony\Component\HttpFoundation\Session\Storage\NativeSessionStorage;
 use Symfony\Component\HttpFoundation\Session\Storage\SessionStorageInterface;
 use Xervice\Core\Factory\AbstractFactory;
 
-/**
- * @method \Xervice\Session\SessionConfig getConfig()
- */
 class SessionFactory extends AbstractFactory
 {
     /**
@@ -22,6 +19,7 @@ class SessionFactory extends AbstractFactory
 
     /**
      * @return \Symfony\Component\HttpFoundation\Session\Session
+     * @throws \InvalidArgumentException
      * @throws \RuntimeException
      */
     public function getSession(): Session
@@ -34,6 +32,8 @@ class SessionFactory extends AbstractFactory
 
     /**
      * @return \Symfony\Component\HttpFoundation\Session\Session
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
      */
     public function createSession(): Session
     {
@@ -44,6 +44,8 @@ class SessionFactory extends AbstractFactory
 
     /**
      * @return \Symfony\Component\HttpFoundation\Session\Storage\NativeSessionStorage
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
      */
     public function createSessionStorage(): SessionStorageInterface
     {
@@ -55,8 +57,10 @@ class SessionFactory extends AbstractFactory
 
     /**
      * @return \Symfony\Component\HttpFoundation\Session\Storage\Handler\NativeFileSessionHandler
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
      */
-    public function createSessionHandler()
+    public function createSessionHandler(): NativeFileSessionHandler
     {
         return new NativeFileSessionHandler();
     }
