@@ -13,13 +13,12 @@
   },
   "require": {
     "php": ">=7.1.0",
-    "xervice/core": "^2.0.0",
+    "xervice/kernel": "^1.0.0",
     "symfony/http-foundation": "4.0.*"
   },
   "autoload": {
     "psr-4": {
-      "XerviceTest\\": "tests/Xervice/",
-      "DataProvider\\": "src/Generated/"
+      "XerviceTest\\": "tests/Xervice/"
     },
     "psr-0": {
       "Xervice\\": "src/"
