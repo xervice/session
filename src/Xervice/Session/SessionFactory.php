@@ -51,17 +51,15 @@ class SessionFactory extends AbstractFactory
     {
         return new NativeSessionStorage(
             [],
-            $this->createSessionHandler()
+            $this->getSessionHandler()
         );
     }
 
     /**
-     * @return \Symfony\Component\HttpFoundation\Session\Storage\Handler\NativeFileSessionHandler
-     * @throws \RuntimeException
-     * @throws \InvalidArgumentException
+     * @return \SessionHandlerInterface
      */
-    public function createSessionHandler(): NativeFileSessionHandler
+    public function getSessionHandler(): \SessionHandlerInterface
     {
-        return new NativeFileSessionHandler();
+        return $this->getDependency(SessionDependencyProvider::SESSION_HANDLER);
     }
 }
