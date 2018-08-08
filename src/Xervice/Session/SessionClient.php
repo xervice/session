@@ -8,6 +8,12 @@ use Xervice\Core\Client\AbstractClient;
 
 /**
  * @method \Xervice\Session\SessionFactory getFactory()
+ * @method string getId()
+ * @method bool has($name)
+ * @method mixed get($name, $default = null)
+ * @method void set($name, $value)
+ * @method mixed remove($name)
+ * @method void clear()
  */
 class SessionClient extends AbstractClient
 {
