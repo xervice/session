@@ -5,18 +5,23 @@ namespace Xervice\Session;
 
 
 use Symfony\Component\HttpFoundation\Session\Storage\Handler\NativeFileSessionHandler;
-use Xervice\Core\Dependency\DependencyProviderInterface;
-use Xervice\Core\Dependency\Provider\AbstractProvider;
+use Xervice\Core\Business\Model\Dependency\DependencyContainerInterface;
+use Xervice\Core\Business\Model\Dependency\Provider\AbstractDependencyProvider;
 
-class SessionDependencyProvider extends AbstractProvider
+class SessionDependencyProvider extends AbstractDependencyProvider
 {
     public const SESSION_HANDLER = 'session.handler';
 
-    public function handleDependencies(DependencyProviderInterface $dependencyProvider): void
+    /**
+     * @param \Xervice\Core\Business\Model\Dependency\DependencyContainerInterface $container
+     *
+     * @return \Xervice\Core\Business\Model\Dependency\DependencyContainerInterface
+     */
+    public function handleDependencies(DependencyContainerInterface $container): DependencyContainerInterface
     {
-        $dependencyProvider[self::SESSION_HANDLER] = function () {
-            return $this->getSessionHandler();
-        };
+        $container = $this->addSessionHandler($container);
+
+        return $container;
     }
 
     /**
@@ -27,6 +32,20 @@ class SessionDependencyProvider extends AbstractProvider
     protected function getSessionHandler(): \SessionHandlerInterface
     {
         return new NativeFileSessionHandler();
+    }
+
+    /**
+     * @param \Xervice\Core\Business\Model\Dependency\DependencyContainerInterface $container
+     *
+     * @return \Xervice\Core\Business\Model\Dependency\DependencyContainerInterface
+     */
+    protected function addSessionHandler(
+        DependencyContainerInterface $container
+    ): DependencyContainerInterface {
+        $container[self::SESSION_HANDLER] = function () {
+            return $this->getSessionHandler();
+        };
+        return $container;
     }
 
 }

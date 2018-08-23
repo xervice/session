@@ -1,16 +1,16 @@
 <?php
+declare(strict_types=1);
 
-
-namespace Xervice\Session;
+namespace Xervice\Session\Business;
 
 
 use Symfony\Component\HttpFoundation\Session\Session;
-use Symfony\Component\HttpFoundation\Session\Storage\Handler\NativeFileSessionHandler;
 use Symfony\Component\HttpFoundation\Session\Storage\NativeSessionStorage;
 use Symfony\Component\HttpFoundation\Session\Storage\SessionStorageInterface;
-use Xervice\Core\Factory\AbstractFactory;
+use Xervice\Core\Business\Model\Factory\AbstractBusinessFactory;
+use Xervice\Session\SessionDependencyProvider;
 
-class SessionFactory extends AbstractFactory
+class SessionBusinessFactory extends AbstractBusinessFactory
 {
     /**
      * @var Session

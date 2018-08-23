@@ -1,15 +1,14 @@
 <?php
 namespace XerviceTest\Session;
 
-use Xervice\Core\Locator\Dynamic\DynamicLocator;
+use Xervice\Core\Business\Model\Locator\Dynamic\Business\DynamicBusinessLocator;
 
 /**
- * @method \Xervice\Session\SessionFacade getFacade()
- * @method \Xervice\Session\SessionClient getClient()
+ * @method \Xervice\Session\Business\SessionFacade getFacade()
  */
 class IntegrationTest extends \Codeception\Test\Unit
 {
-    use DynamicLocator;
+    use DynamicBusinessLocator;
 
     /**
      * @var \XerviceTest\XerviceTester
@@ -28,10 +27,10 @@ class IntegrationTest extends \Codeception\Test\Unit
      */
     public function testSessionSet()
     {
-        $this->getClient()->set('my.test', 'testval');
+        $this->getFacade()->set('my.test', 'testval');
         $this->assertEquals(
             'testval',
-            $this->getClient()->get('my.test', 'default')
+            $this->getFacade()->get('my.test', 'default')
         );
     }
 
