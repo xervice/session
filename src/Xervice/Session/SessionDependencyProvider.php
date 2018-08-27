@@ -29,7 +29,7 @@ class SessionDependencyProvider extends AbstractDependencyProvider
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    protected function getSessionHandler(): \SessionHandlerInterface
+    protected function getSessionHandler(DependencyContainerInterface $container): \SessionHandlerInterface
     {
         return new NativeFileSessionHandler();
     }
@@ -42,8 +42,8 @@ class SessionDependencyProvider extends AbstractDependencyProvider
     protected function addSessionHandler(
         DependencyContainerInterface $container
     ): DependencyContainerInterface {
-        $container[self::SESSION_HANDLER] = function () {
-            return $this->getSessionHandler();
+        $container[self::SESSION_HANDLER] = function (DependencyContainerInterface $container) {
+            return $this->getSessionHandler($container);
         };
         return $container;
     }
